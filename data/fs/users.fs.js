@@ -68,7 +68,7 @@ class UserManager {
     try {
       const users = await this.readFile();
 
-      return users.find((el) => el.id == id) ?? [];
+      return users.find((el) => el.id == id);
     } catch (e) {
       throw e.message;
     }
@@ -77,6 +77,7 @@ class UserManager {
   async destroy(id) {
     try {
       const users = await this.readFile();
+
       const newList = users.filter((el) => el.id !== id);
 
       if (users.length == newList.length) return false;
@@ -91,5 +92,25 @@ class UserManager {
 }
 
 const UsersManager = new UserManager();
+
+// (async () => {
+//   await UsersManager.create({
+//     name: "Tomas",
+//     photo: "http://img",
+//     email: "prueba@gmail.com",
+//   });
+
+//   await UsersManager.create({
+//     name: "Ignacio",
+//     photo: "http://img",
+//     email: "prueba2@gmail.com",
+//   });
+
+//   await UsersManager.create({
+//     name: "German",
+//     photo: "http://img",
+//     email: "prueba3@gmail.com",
+//   });
+// })();
 
 export default UsersManager;
